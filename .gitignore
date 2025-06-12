@@ -3,3 +3,4 @@ outputs/*
 *.nc
 *.zarr
 __pycache__/
+.snakemake/
