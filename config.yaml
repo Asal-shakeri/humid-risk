@@ -1,8 +1,16 @@
 # config.yaml
 
+# Pipeline metadata (optional)
+metadata:
+  name: "humid-risk-pipeline"
+  version: "0.1"
+  author: "Asal Shakeri"
+  created: "2025-06-12"
+
+
 # Input NetCDF file
 inputs:
-  - "data/data.nc"
+  - "data.nc"
 
 # Base period for RH90p climatology
 base_period:

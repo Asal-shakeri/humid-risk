@@ -47,6 +47,8 @@ rule trend_analysis:
         """
         python {config[scripts][trends]}
         """
+        python {config[scripts][trends]}
+        """
 
 rule make_risk_map:
     input:
