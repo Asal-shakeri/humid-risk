@@ -1,0 +1,19 @@
+name: humid_risk
+channels: 
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - xarray
+  - dask
+  - bottleneck
+  - netcdf4
+  - xclim
+  - rioxarray
+  - pyproj
+  - cartopy
+  - matplotlib
+  - pyMannKendall
+  - tqdm
+  - jupyterlab
+  - zarr   
