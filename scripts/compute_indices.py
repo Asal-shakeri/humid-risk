@@ -4,12 +4,6 @@ import argparse
 import xarray as xr
 from xclim.indices import relative_humidity
 import numpy as np
-import logging
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s %(levelname)s %(message)s"
-)
-logger = logging.getLogger(__name__)
 
 def main(args):
     # Load ERA5 NetCDF files
