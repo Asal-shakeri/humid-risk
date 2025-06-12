@@ -1,0 +1,32 @@
+# config.yaml
+
+# Input NetCDF file
+inputs:
+  - "data/data.nc"
+
+# Base period for RH90p climatology
+base_period:
+  start: "1961-01-01"
+  end:   "1990-12-31"
+
+# Zarr output stores and groups
+out_indices:       "outputs/indices.zarr"
+out_yearly_grp:    "yearly_stats"
+out_trends_dir:    "outputs/trends"
+out_risk_zarr:     "outputs/risk_map.zarr"
+out_risk_png:      "outputs/humidity_risk_map.png"
+
+# Significance threshold for risk classification
+alpha: 0.05
+
+# Variables to process in trend analysis
+trend_vars:
+  - "RH90p"
+  - "t2m"
+
+# Scripts
+scripts:
+  compute:  "scripts/compute_indices.py"
+  add:      "scripts/add_indices.py"
+  trends:   "scripts/trend_analysis.py"
+  risk_map: "scripts/make_risk_map.py"

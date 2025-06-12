@@ -3,6 +3,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pymannkendall as mk
 import os
+import logging
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(message)s"
+)
+logger = logging.getLogger(__name__)
+
 
 def mk_trend(da):
     """
@@ -50,10 +59,10 @@ ds = xr.open_zarr(DATA_PATH)
 
 for var in VARS:
     if var not in ds:
-        print(f"⚠️ Variable {var} not found. Skipping.")
+        logger.warning(f"❌ Unsupported slope dimensionality: {slope.shape}")
         continue
 
-    print(f"📈 Processing trend for: {var}")
+    logger.info(f"📈 Processing trend for: {var}")
     slope, pval = mk_trend(ds[var])
 
     slope = slope.rename(f"{var}_slope")
@@ -63,7 +72,7 @@ for var in VARS:
     out_path = os.path.join(OUTPUT_DIR, f"{var}.zarr")
 
     trend_ds.to_zarr(out_path, mode="w")
-    print(f"✅ Saved trend data to: {out_path}")
+    logger.info(f"✅ Saved trend data to: {out_path}")
 
     # Plot and optionally save
     if slope.ndim == 2:
@@ -71,13 +80,13 @@ for var in VARS:
     elif slope.ndim == 1:
         slope.plot.line()
     else:
-        print("❌ Unsupported slope dimensionality:", slope.shape)
+        logger.warning("❌ Unsupported slope dimensionality:", slope.shape)
 
     plt.title(f"Trend (Sen's slope) of {var}")
     plt.tight_layout()
 
     if SAVE_PLOT:
         plt.savefig(os.path.join(OUTPUT_DIR, f"{var}_slope.png"), dpi=150)
-        print(f"🖼 Saved plot: {var}_slope.png")
+        logger.info(f"🖼 Saved plot: {var}_slope.png")
 
     plt.show()
